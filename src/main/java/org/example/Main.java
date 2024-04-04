@@ -7,7 +7,7 @@ public class Main {
     if (op.matches("[a-z]+")) {
       Instruction in = initOp(op);
       in.toMachine(argz);
-      System.out.print(in.getWord() + "\n");
+      System.out.println(in);
     } else {
       // TODO milestone 2
       System.out.print("");

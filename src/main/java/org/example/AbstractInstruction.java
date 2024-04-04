@@ -8,11 +8,6 @@ package org.example;
 public abstract class AbstractInstruction implements Instruction {
   String word, op;
 
-  @Override
-  public String getWord() {
-    return word;
-  }
-
   /*
    * Converts a hexadecimal number to binary.
    */
@@ -89,5 +84,10 @@ public abstract class AbstractInstruction implements Instruction {
     }
 
     return arg;
+  }
+
+  @Override
+  public String toString() {
+    return word;
   }
 }

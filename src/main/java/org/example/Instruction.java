@@ -4,7 +4,6 @@ package org.example;
  * different instruction types.
  */
 public interface Instruction {
-  String getWord();
   String decToBin(String dec, int bits);
   void toMachine(String[] argz);
   String hexToBin(String hex, int bits);
