@@ -58,7 +58,12 @@ Output:
       
 
   Syscall:
+  
     mnemonic {opcode: XX, code: 000000, funct: XX}
+    
     ex:
+    
       input: 0000000c 
+      
       output: syscall {opcode: 00, code: 000000, funct: 0c}
+      
