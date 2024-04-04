@@ -1,0 +1,13 @@
+resources:
+
+To easily convert char to int for conversion
+https://stackoverflow.com/questions/4968323/java-parse-int-value-from-a-char
+
+Remove all occurrences of char from string (comments in args)
+https://stackoverflow.com/questions/4576352/remove-all-occurrences-of-char-from-string
+
+Needed help going from hex to binary:
+https://stackoverflow.com/a/57177474
+
+Splitting on a "(" was a pain:
+https://stackoverflow.com/a/50568373
