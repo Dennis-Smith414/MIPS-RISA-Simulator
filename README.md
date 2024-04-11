@@ -21,3 +21,49 @@ The program supports limited instructions:
 -    syscall
 
 Usage: run the jar file with a single 8-digit hexadecimal number (without preceeding 0x) representing an instruction. The program will then print relevant values.
+
+Output:
+
+  R-Types:
+  
+    mnemonic {opcode: XX, rs: XX, rt: XX, rd: XX, shmt: XX, funct: XX}
+    
+    ex:
+    
+      input: 0140a820 
+      
+      output: add {opcode: 00, rs: 0a, rt: 00, rd: 15, shmt: 00, funct: 20}
+      
+
+  I-Types:
+  
+    mnemonic {opcode: XX, rs(base): XX, rt: XX, immediate(offset): XXXX}
+    
+    ex:
+    
+      input: 274700c3 
+      
+      output: addiu {opcode: 09, rs(base): 1a, rt: 07, immediate(offset): 00c3}
+      
+
+  J-Types:
+  
+    mnemonic {opcode: XX, index: XXXXXXX}
+    
+    ex:
+    
+      input: 0800008c 
+      
+      output: j {opcode: 02, index: 000008c}
+      
+
+  Syscall:
+  
+    mnemonic {opcode: XX, code: 000000, funct: XX}
+    
+    ex:
+    
+      input: 0000000c 
+      
+      output: syscall {opcode: 00, code: 000000, funct: 0c}
+      
