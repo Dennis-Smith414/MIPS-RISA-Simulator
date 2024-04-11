@@ -10,7 +10,7 @@ public class Main {
       System.out.println(in);
     } else {
       // TODO milestone 2
-      System.out.print("");
+      System.out.print("TODO");
     }
   }
 
