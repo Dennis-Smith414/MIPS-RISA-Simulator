@@ -11,7 +11,7 @@ public class JumpType extends AbstractInstruction {
     op = "000010";
   }
   public JumpType(String binOp) {
-    op = "000010";
+    op = binOp;
   }
 
   /*
@@ -35,7 +35,7 @@ public class JumpType extends AbstractInstruction {
 
   @Override
   public void toDisassembled() {
-
+    word = "j {opcode: 02, index: " + Conversions.binToHex(op.substring(6)).substring(1) + "}";
   }
 
   /*
