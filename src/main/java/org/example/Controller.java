@@ -8,13 +8,13 @@ public class Controller {
     String op = ParseArgs.findOp(argz);
     Instruction in;
     if (op.matches("[a-z]+")) {
-      in = initOp(op, null);
+      in = initInstr(op);
       in.toMachine(argz);
-      result = in.toString();
+      result = in.toString() + "\n";
     } else {
       // TODO milestone 2
       result = Conversions.hexToBin(op, 32);
-      in = initOp(result.substring(0, 6), result);
+      in = initOp(result);
       in.toDisassembled();
       result = in.toString();
     }
@@ -25,7 +25,7 @@ public class Controller {
   /*
    * Initializes an instruction based on opcode.
    */
-  private static AbstractInstruction initOp(String op, String binOp) {
+  private static AbstractInstruction initInstr(String op) {
     return switch (op) {
       // TO MACHINE
 
@@ -47,29 +47,36 @@ public class Controller {
       // J-TYPE:
       case "j" -> new JumpType();
       // SYSCALL:
-      case "syscall", "000000" -> new Syscall();
+      case "syscall" -> new Syscall();
 
-
-      // DISASSEMBLE
-
-      // R-TYPES:
-      case "100000" -> new RegisterType(binOp);
-      case "100100" -> new RegisterType(binOp);
-      case "100101" -> new RegisterType(binOp);
-      case "101010" -> new RegisterType(binOp);
-      case "100010" -> new RegisterType(binOp);
-      // I-TYPES:
-      case "001001" -> new ImmediateType(binOp);
-      case "001100" -> new ImmediateType(binOp);
-      case "000100" -> new ImmediateType(binOp);
-      case "000101" -> new ImmediateType(binOp);
-      case "001111" -> new ImmediateType(binOp);
-      case "100011" -> new ImmediateType(binOp);
-      case "001101" -> new ImmediateType(binOp);
-      case "101011" -> new ImmediateType(binOp);
-      // J-TYPE:
-      case "000010" -> new JumpType(binOp);
       default -> null;
     };
+  }
+
+  private static AbstractInstruction initOp(String bin) {
+
+    // SYSCALL, R-TYPES
+    if (bin.startsWith("000000")) {
+      if (bin.endsWith("001100")) return new Syscall();
+      else return new RegisterType(bin);
+    }
+
+    // J-TYPE
+    if (bin.startsWith("000010")) return new JumpType(bin);
+    // DISASSEMBLE
+
+    // I-TYPES:
+//    case "001001" -> new ImmediateType(binOp);
+//    case "001100" -> new ImmediateType(binOp);
+//    case "000100" -> new ImmediateType(binOp);
+//    case "000101" -> new ImmediateType(binOp);
+//    case "001111" -> new ImmediateType(binOp);
+//    case "100011" -> new ImmediateType(binOp);
+//    case "001101" -> new ImmediateType(binOp);
+//    case "101011" -> new ImmediateType(binOp);
+//    // J-TYPE:
+//    case "000010" -> new JumpType(binOp);
+//    default -> null;
+    return null;
   }
 }

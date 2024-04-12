@@ -33,6 +33,24 @@ public class RegisterType extends AbstractInstruction {
 
   @Override
   public void toDisassembled() {
+    String instr = funct;
+    funct = instr.substring(26);
+    String mnemonic = mnemonic(funct);
+    funct = Conversions.binToHex(funct).substring(6);
+    rs = binToHex(instr.substring(6, 11)).substring(6);
+    rt = binToHex(instr.substring(11, 16)).substring(6);
+    rd = binToHex(instr.substring(16, 21)).substring(6);
+    word = mnemonic + " {opcode: 00, rs: " + rs + ", rt: " + rt + ", rd: " + rd + ", shmt: 00, funct: " + funct + "}";
+  }
 
+  private static String mnemonic(String funct) {
+    return switch (funct) {
+      case ("100000") -> "add";
+      case ("100100") -> "and";
+      case ("100101") -> "or";
+      case ("101010") -> "slt";
+      case ("100010") -> "sub";
+      default -> null;
+    };
   }
 }
