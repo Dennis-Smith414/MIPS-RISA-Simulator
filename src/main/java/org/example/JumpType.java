@@ -21,7 +21,6 @@ public class JumpType extends AbstractInstruction {
   public void toMachine(String[] argz) {
     if (argz.length > 1)
       setInstrIndex(argz);
-    else setInstrIndex(label);
 
     StringBuilder sb = new StringBuilder(op);
     StringBuilder sbInd = new StringBuilder(instrIndex);
