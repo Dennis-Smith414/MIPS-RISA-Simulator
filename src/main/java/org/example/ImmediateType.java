@@ -43,6 +43,11 @@ public class ImmediateType extends AbstractInstruction {
     word = binToHex(sb.toString());
   }
 
+  @Override
+  public void toDisassembled() {
+
+  }
+
   private void branch(String[] argz) {
     rs = decToBin(registers(argFinder(argz, 1)),5);
     rt = decToBin(registers(argFinder(argz, 2)), 5);

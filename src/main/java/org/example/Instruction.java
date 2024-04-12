@@ -11,4 +11,5 @@ public interface Instruction {
 
   String registers(String reg);
   String argFinder(String[] argz, int index);
+  public void toDisassembled();
 }

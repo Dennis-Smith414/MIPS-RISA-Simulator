@@ -30,4 +30,9 @@ public class RegisterType extends AbstractInstruction {
 
     word = binToHex(sb.toString());
   }
+
+  @Override
+  public void toDisassembled() {
+
+  }
 }

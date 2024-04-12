@@ -1,5 +1,7 @@
 package org.example;
 
+import java.math.BigInteger;
+
 public class Conversions {
 
   /*
@@ -13,7 +15,8 @@ public class Conversions {
    * Converts a hexadecimal number to binary.
    */
   public static String hexToBin(String hex, int bits) {
-    StringBuilder sb = new StringBuilder(Integer.toBinaryString(Integer.parseInt(hex, 16)));
+    BigInteger b = new BigInteger(hex, 16);
+    StringBuilder sb = new StringBuilder(b.toString(2));
     while (sb.length() < bits) sb.insert(0, 0);
     hex = sb.toString();
     return hex;

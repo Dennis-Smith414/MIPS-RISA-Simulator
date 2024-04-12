@@ -10,6 +10,9 @@ public class JumpType extends AbstractInstruction {
   public JumpType() {
     op = "000010";
   }
+  public JumpType(String binOp) {
+    op = "000010";
+  }
 
   /*
    * Converts jump instruction and index into hexadecimal machine code.
@@ -28,6 +31,11 @@ public class JumpType extends AbstractInstruction {
 
     sb.append(sbInd);                                           // form the instruction's machine code in binary
     word = binToHex(sb.toString());                             // converts binary -> decimal -> hexadecimal
+  }
+
+  @Override
+  public void toDisassembled() {
+
   }
 
   /*

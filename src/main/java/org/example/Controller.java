@@ -6,15 +6,17 @@ public class Controller {
     String result;
     String[] argz = args[0].split(" ");
     String op = ParseArgs.findOp(argz);
+    Instruction in;
     if (op.matches("[a-z]+")) {
-      Instruction in = initOp(op);
+      in = initOp(op, null);
       in.toMachine(argz);
       result = in.toString();
     } else {
       // TODO milestone 2
       result = Conversions.hexToBin(op, 32);
-      System.out.println(result);
-      result = null;
+      in = initOp(result.substring(0, 6), result);
+      in.toDisassembled();
+      result = in.toString();
     }
 
     return result;
@@ -23,8 +25,10 @@ public class Controller {
   /*
    * Initializes an instruction based on opcode.
    */
-  private static AbstractInstruction initOp(String op) {
+  private static AbstractInstruction initOp(String op, String binOp) {
     return switch (op) {
+      // TO MACHINE
+
       // R-TYPES:
       case "add" -> new RegisterType("100000");
       case "and" -> new RegisterType("100100");
@@ -43,7 +47,28 @@ public class Controller {
       // J-TYPE:
       case "j" -> new JumpType();
       // SYSCALL:
-      case "syscall" -> new Syscall();
+      case "syscall", "000000" -> new Syscall();
+
+
+      // DISASSEMBLE
+
+      // R-TYPES:
+      case "100000" -> new RegisterType(binOp);
+      case "100100" -> new RegisterType(binOp);
+      case "100101" -> new RegisterType(binOp);
+      case "101010" -> new RegisterType(binOp);
+      case "100010" -> new RegisterType(binOp);
+      // I-TYPES:
+      case "001001" -> new ImmediateType(binOp);
+      case "001100" -> new ImmediateType(binOp);
+      case "000100" -> new ImmediateType(binOp);
+      case "000101" -> new ImmediateType(binOp);
+      case "001111" -> new ImmediateType(binOp);
+      case "100011" -> new ImmediateType(binOp);
+      case "001101" -> new ImmediateType(binOp);
+      case "101011" -> new ImmediateType(binOp);
+      // J-TYPE:
+      case "000010" -> new JumpType(binOp);
       default -> null;
     };
   }
