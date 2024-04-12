@@ -7,12 +7,11 @@ public class Controller {
     String[] argz = args[0].split(" ");
     String op = ParseArgs.findOp(argz);
     Instruction in;
-    if (op.matches("[a-z]+")) {
+    if (op.length() < 8) {
       in = initInstr(op);
       in.toMachine(argz);
-      result = in.toString() + "\n";
+      result = in.toString();
     } else {
-      // TODO milestone 2
       result = Conversions.hexToBin(op, 32);
       in = initOp(result);
       in.toDisassembled();
@@ -66,17 +65,6 @@ public class Controller {
     // DISASSEMBLE
 
     // I-TYPES:
-//    case "001001" -> new ImmediateType(binOp);
-//    case "001100" -> new ImmediateType(binOp);
-//    case "000100" -> new ImmediateType(binOp);
-//    case "000101" -> new ImmediateType(binOp);
-//    case "001111" -> new ImmediateType(binOp);
-//    case "100011" -> new ImmediateType(binOp);
-//    case "001101" -> new ImmediateType(binOp);
-//    case "101011" -> new ImmediateType(binOp);
-//    // J-TYPE:
-//    case "000010" -> new JumpType(binOp);
-//    default -> null;
-    return null;
+    return new ImmediateType(bin);
   }
 }

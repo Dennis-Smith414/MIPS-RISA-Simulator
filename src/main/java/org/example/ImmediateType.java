@@ -36,16 +36,21 @@ public class ImmediateType extends AbstractInstruction {
     rs = decToBin(registers(argFinder(argz, 2)), 5);
     immediate = argFinder(argz, 3);
     immediate = (immediate.charAt(0) == '-') ? twosComplement(immediate) : decOrHex(immediate);
-    StringBuilder sb = new StringBuilder(op);
-    sb.append(rs);
-    sb.append(rt);
-    sb.append(immediate);
-    word = binToHex(sb.toString());
+    String sb = op + rs +
+            rt +
+            immediate;
+    word = binToHex(sb);
   }
 
   @Override
   public void toDisassembled() {
-
+    String opcode = op.substring(0, 6);
+    String mnemonic = mnemonic(opcode);
+    opcode = binToHex(opcode).substring(6);
+    base = binToHex(op.substring(6, 11)).substring(6);
+    rt = binToHex(op.substring(11, 16)).substring(6);
+    offset = binToHex(op.substring(16)).substring(4);
+    word = mnemonic + " {opcode: " + opcode + ", rs(base): " + base + ", rt: " + rt + ", immediate(offset): " + offset + "}";
   }
 
   private void branch(String[] argz) {
@@ -53,11 +58,10 @@ public class ImmediateType extends AbstractInstruction {
     rt = decToBin(registers(argFinder(argz, 2)), 5);
     immediate = argFinder(argz, 3);
     immediate = (immediate.charAt(0) == '-') ? twosComplement(immediate) : decOrHex(immediate);
-    StringBuilder sb = new StringBuilder(op);
-    sb.append(rs);
-    sb.append(rt);
-    sb.append(immediate);
-    word = binToHex(sb.toString());
+    String sb = op + rs +
+            rt +
+            immediate;
+    word = binToHex(sb);
   }
 
   /*
@@ -69,11 +73,10 @@ public class ImmediateType extends AbstractInstruction {
     offset = argFinder(argz, 2).split("\\(")[0];
     if (offset.isEmpty()) offset = "0000000000000000";
     else offset = (offset.charAt(0) == '-') ? twosComplement(offset) : decOrHex(offset);
-    StringBuilder sb = new StringBuilder(op);
-    sb.append(base);
-    sb.append(rt);
-    sb.append(offset);
-    word = new BigInteger(sb.toString(), 2).toString(16);
+    String sb = op + base +
+            rt +
+            offset;
+    word = new BigInteger(sb, 2).toString(16);
   }
 
   /*
@@ -83,11 +86,10 @@ public class ImmediateType extends AbstractInstruction {
     rt = decToBin(registers(argFinder(argz, 1)), 5);
     immediate = argFinder(argz, 2);
     immediate = (immediate.charAt(0) == '-') ? twosComplement(immediate) : decOrHex(immediate);
-    StringBuilder sb = new StringBuilder(op);
-    sb.append("00000");
-    sb.append(rt);
-    sb.append(immediate);
-    word = binToHex(sb.toString());
+    String sb = op + "00000" +
+            rt +
+            immediate;
+    word = binToHex(sb);
   }
 
   /*

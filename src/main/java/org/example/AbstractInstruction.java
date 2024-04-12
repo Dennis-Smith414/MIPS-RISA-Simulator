@@ -86,6 +86,25 @@ public abstract class AbstractInstruction implements Instruction {
     return arg;
   }
 
+  public String mnemonic(String funct) {
+    return switch (funct) {
+      case "100000" -> "add";
+      case "100100" -> "and";
+      case "100101" -> "or";
+      case "101010" -> "slt";
+      case "100010" -> "sub";
+      case "001001" -> "addiu";
+      case "001100" -> "andi";
+      case "000100" -> "beq";
+      case "000101" -> "bne";
+      case "001111" -> "lui";
+      case "100011" -> "lw";
+      case "001101" -> "ori";
+      case "101011" -> "sw";
+      default -> null;
+    };
+  }
+
   @Override
   public String toString() {
     return word;

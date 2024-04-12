@@ -49,8 +49,4 @@ public class JumpType extends AbstractInstruction {
     }
     instrIndex = hexToBin(instrIndex.split("x")[1].split("#")[0], 26);
   }
-
-  private void setInstrIndex(String label) {
-    // TODO: new logic for instruction index likely needed
-  }
 }
