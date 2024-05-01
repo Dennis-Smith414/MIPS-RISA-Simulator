@@ -55,13 +55,18 @@ public class Main {
     } catch (IOException e) {
       throw new RuntimeException();
     }
-
-
   }
 
   private void run() {
-
-
+    Executor execute = new Executor(registers , mem);
+    while (true) {
+      int instruction = mem[programCounter];
+      if (instruction == 0) {
+        System.out.println("done");
+        break;
+      }
+      //call executor class
+      programCounter += 4;
   }
 
 
