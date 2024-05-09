@@ -66,6 +66,7 @@ public class Main {
         break;
       }
       //call executor class
+      execute.executeInstruction(instruction);
       programCounter += 4;
   }
 

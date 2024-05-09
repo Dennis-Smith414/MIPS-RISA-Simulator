@@ -11,7 +11,7 @@ public class Executor {
         this.memory = memory;
     }
     //determine which instruction to execute
-    private void executeInstruction(int instruction) {
+    void executeInstruction(int instruction) {
         int opcode = instruction >>> 26;
         switch (opcode) {
             case 0x00:
@@ -96,9 +96,7 @@ public class Executor {
         Syscall sys = new Syscall();
         String[] sysInstruction = sysHelper(instruction);
         sys.toMachine(sysInstruction);
-
         //figure out the rest
-
     }
 
     private String[] sysHelper(int instruction) {
