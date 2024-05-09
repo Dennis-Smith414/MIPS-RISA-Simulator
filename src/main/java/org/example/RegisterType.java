@@ -34,6 +34,13 @@ public class RegisterType extends AbstractInstruction {
   @Override
   public void toDisassembled() {
     String instr = funct;
+    // debug
+    System.out.println("funct:" + funct);
+    System.out.println("rd:" + rd);
+    System.out.println("rs:" + rs);
+    System.out.println("rt:" + rt);
+
+
     funct = instr.substring(26);
     String mnemonic = mnemonic(funct);
     funct = binToHex(funct).substring(6);

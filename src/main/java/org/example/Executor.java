@@ -11,23 +11,32 @@ public class Executor {
         this.memory = memory;
     }
     //determine which instruction to execute
-    void executeInstruction(int instruction) {
-        int opcode = instruction >>> 26;
+    void executeInstruction(String instruction) {
+//        int opcode = instruction >>> 26;
+        String opcode = instruction.substring(0,6);
+
+
+        if (instruction.equals("00000000000000000000000000001100")) {
+            doSyscall(Integer.parseInt(Conversions.binToHex(instruction), 16));
+            return;
+        }
+
         switch (opcode) {
-            case 0x00:
-                doRType(instruction);
+            // 0x00
+            case "000000":
+                doRType(Integer.parseInt(Conversions.binToHex(instruction), 16));
                 break;
-            case 0x23:
-                doLw(instruction);
+            case "100011":
+                doLw(Integer.parseInt(Conversions.binToHex(instruction), 16));
                 break;
-            case 0x2B:
-                doSw(instruction);
+            case "101011":
+                doSw(Integer.parseInt(Conversions.binToHex(instruction), 16));
                 break;
-            case 0x0F:
-                doLui(instruction);
+            case "001111":
+                doLui(Integer.parseInt(Conversions.binToHex(instruction), 16));
                 break;
-            case 0x0C:
-                doSyscall(instruction);
+            case "turbo":
+                doSyscall(Integer.parseInt(Conversions.binToHex(instruction), 16));
                 break;
             default:
                 System.out.println("invaild");
@@ -35,8 +44,9 @@ public class Executor {
     }
 
     private void doRType(int instruction) {
-        String funct = Integer.toBinaryString(instruction & 0x3F);
-        funct = String.format("%06d", Integer.parseInt(funct));
+//        String funct = Integer.toBinaryString(instruction & 0x3F);
+        String funct = Conversions.hexToBin(Integer.toString(instruction), 32);
+       // funct = String.format("%06d", Integer.parseInt(funct));
         RegisterType r = new RegisterType(funct);
         r.toDisassembled();
 

@@ -3,15 +3,18 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
     //init the MIPS processor
     private static final int REG_NUM = 32;
-    private static final int MEM_SIZE = 0x1000;
+    private static final int MEM_SIZE = 0x20000000;
 
     private int[] registers = new int[REG_NUM];
     private int[] mem = new int[MEM_SIZE];
+//    private Map<Integer, Integer> mem = new HashMap<>();
     private int programCounter;
 
 
@@ -61,12 +64,15 @@ public class Main {
     Executor execute = new Executor(registers , mem);
     while (true) {
       int instruction = mem[programCounter];
+      String in = String.valueOf(instruction);
+      in = Conversions.decToBin(in, 32);
+
       if (instruction == 0) {
         System.out.println("done");
         break;
       }
       //call executor class
-      execute.executeInstruction(instruction);
+      execute.executeInstruction(in);
       programCounter += 4;
   }
 
